@@ -1,0 +1,66 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎮 NETWORK PLAY - QUICK REFERENCE CARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 YOUR GAME URL (Share with players):
+   http://192.168.1.9:3000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK START:
+   
+   Option 1 (Easiest):
+   ./start-network.sh
+
+   Option 2 (Manual):
+   Terminal 1: cd backend && npm run dev
+   Terminal 2: cd frontend && npm run dev -- --host
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ REQUIREMENTS:
+   - All devices on SAME Wi-Fi network
+   - Firewall allows ports 3000 and 3001
+   - Modern browser (Chrome, Safari, Firefox, Edge)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 HOW TO PLAY:
+   
+   1. Start the servers (see Quick Start above)
+   
+   2. On your computer:
+      - Open: http://192.168.1.9:3000
+      - Create a room
+      - Copy the room code
+   
+   3. On other devices (phones/tablets/laptops):
+      - Open: http://192.168.1.9:3000
+      - Join with the room code
+   
+   4. Game starts when 4 players join!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ TROUBLESHOOTING:
+
+   Can't connect from other devices?
+   → Check firewall settings
+   → Verify all on same Wi-Fi
+   → Make sure not on guest network
+   
+   Connection drops?
+   → Move closer to router
+   → Use 5GHz Wi-Fi if available
+   
+   IP address changed?
+   → Run: ifconfig | grep "inet " | grep -v 127.0.0.1
+   → Update frontend/.env with new IP
+   → Restart servers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 FULL GUIDE:
+   See NETWORK_PLAY_GUIDE.md for detailed instructions
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

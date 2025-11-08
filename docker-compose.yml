@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7
+    container_name: cardgame-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: cardgame
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - cardgame-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: cardgame-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cardgame-network
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: cardgame-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGODB_URI: mongodb://mongodb:27017/cardgame
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-your_super_secret_jwt_key_change_in_production}
+      CORS_ORIGIN: http://localhost:3000
+      MAX_PLAYERS_PER_ROOM: 4
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - cardgame-network
+    volumes:
+      - ./shared:/app/shared
+
+  # Frontend Web App
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: cardgame-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      VITE_SOCKET_URL: http://localhost:3001
+    depends_on:
+      - backend
+    networks:
+      - cardgame-network
+
+networks:
+  cardgame-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:
