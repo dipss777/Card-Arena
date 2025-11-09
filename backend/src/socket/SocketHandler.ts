@@ -11,6 +11,7 @@ import {
 } from '../../../shared/types';
 import { RoomManager } from '../services/RoomManager';
 import { v4 as uuidv4 } from 'uuid';
+import { log } from 'console';
 
 export class SocketHandler {
   private io: SocketIOServer;
@@ -105,10 +106,11 @@ export class SocketHandler {
   private handleJoinRoom(socket: Socket, payload: JoinRoomPayload): void {
     try {
       let room;
-      
+      console.log({payload})
       if (payload.roomCode) {
         // Join private room by code
         room = this.roomManager.getRoomByCode(payload.roomCode);
+        console.log({room})
         if (!room) {
           socket.emit(SocketEvents.ROOM_NOT_FOUND);
           return;
@@ -117,8 +119,9 @@ export class SocketHandler {
         // Join or create public room for specified game type
         const gameType = payload.gameType || GameType.EASY_PEASY; // Default to Easy-Peasy
         room = this.roomManager.findOrCreatePublicRoom(gameType);
+        console.log({room})
       }
-
+    
       if (room.players.length >= room.maxPlayers) {
         socket.emit(SocketEvents.ROOM_FULL);
         return;

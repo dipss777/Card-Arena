@@ -2,7 +2,8 @@
 
 export enum GameType {
   EASY_PEASY = 'easy_peasy',
-  DEHLA_PAKAD = 'dehla_pakad'
+  DEHLA_PAKAD = 'dehla_pakad',
+  TEEN_DO_PANCH = 'teen_do_panch',
 }
 
 export enum Suit {
