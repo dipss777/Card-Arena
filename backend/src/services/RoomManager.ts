@@ -15,7 +15,8 @@ export class RoomManager {
     this.rooms = new Map();
     this.publicRooms = new Map([
       [GameType.EASY_PEASY, new Set()],
-      [GameType.DEHLA_PAKAD, new Set()]
+      [GameType.DEHLA_PAKAD, new Set()],
+      [GameType.TEEN_DO_PANCH, new Set()]
     ]);
     this.roomCodeMap = new Map();
     this.gameRulesMap = new Map();
@@ -60,7 +61,7 @@ export class RoomManager {
       createdAt: new Date(),
       trumpSuit: gameType === GameType.EASY_PEASY ? Suit.SPADES : undefined,
       trumpDecided: gameType === GameType.EASY_PEASY, // Easy-Peasy has fixed trump
-      trumpDecisionPhase: gameType === GameType.DEHLA_PAKAD, // Dehla-Pakad starts in decision phase
+      trumpDecisionPhase: (gameType === GameType.DEHLA_PAKAD) || (gameType === GameType.TEEN_DO_PANCH),  // Dehla-Pakad starts in decision phase
       cardsPerPlayer: gameRules.getInitialCardCount(),
       currentHand: {
         handNumber: 1,
@@ -72,7 +73,7 @@ export class RoomManager {
       completedHands: [],
       totalHands: gameRules.getTotalHands()
     };
-
+    console.log({room})
     this.rooms.set(roomId, room);
     this.roomCodeMap.set(code, roomId);
     
@@ -89,6 +90,7 @@ export class RoomManager {
   findOrCreatePublicRoom(gameType: GameType): Room {
     // Find an existing public room with space for the specified game type
     const publicRoomsForGame = this.publicRooms.get(gameType);
+    console.log({publicRoomsForGame})
     if (publicRoomsForGame) {
       for (const roomId of publicRoomsForGame) {
         const room = this.rooms.get(roomId);

@@ -180,6 +180,19 @@ const Lobby: React.FC = () => {
                 <div className="font-bold text-sm">Dehla-Pakad</div>
                 <div className="text-xs text-gray-600 mt-1">Dynamic Trump</div>
               </button>
+              <button
+                onClick={() => setSelectedGame(GameType.TEEN_DO_PANCH)}
+                disabled={isLoading}
+                className={`p-4 rounded-lg border-2 transition-all ${
+                  selectedGame === GameType.TEEN_DO_PANCH
+                    ? 'border-blue-500 bg-blue-50 shadow-md'
+                    : 'border-gray-300 hover:border-blue-300'
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                <div className="text-2xl mb-2">🎲</div>
+                <div className="font-bold text-sm">TEEN-DO_PANCH</div>
+                <div className="text-xs text-gray-600 mt-1">Dynamic Trump</div>
+              </button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
               {selectedGame === GameType.EASY_PEASY

@@ -2,6 +2,7 @@ import { GameType, Suit } from '../../../shared/types';
 import { BaseGameRules } from './BaseGameRules';
 import { EasyPeasyRules } from './EasyPeasyRules';
 import { DehlaPakadRules } from './DehlaPakadRules';
+import { TeenDoPanchRules } from './TeenDoPanchRules';
 
 /**
  * Factory class for creating game rules instances
@@ -18,6 +19,9 @@ export class GameRulesFactory {
       
       case GameType.DEHLA_PAKAD:
         return new DehlaPakadRules();
+
+      case GameType.TEEN_DO_PANCH:
+        return new TeenDoPanchRules();
       
       default:
         throw new Error(`Unknown game type: ${gameType}`);
